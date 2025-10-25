@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Birthday Special 🎉</title>
+  <meta name="description" content="A little birthday surprise — moments, wishes, and a special letter." />
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Confetti + App JS -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js" defer></script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <!-- Ambient BG -->
+  <div class="bg"></div>
+
+  <!-- Global hearts along bottom -->
+  <div class="hearts-row" aria-hidden="true">
+    <span class="heart" style="--c:#ff6b6b"></span>
+    <span class="heart" style="--c:#ff8787"></span>
+    <span class="heart" style="--c:#ffb3c1"></span>
+    <span class="heart" style="--c:#f06595"></span>
+    <span class="heart" style="--c:#e599f7"></span>
+    <span class="heart" style="--c:#b197fc"></span>
+    <span class="heart" style="--c:#748ffc"></span>
+    <span class="heart" style="--c:#66d9e8"></span>
+    <span class="heart" style="--c:#63e6be"></span>
+    <span class="heart" style="--c:#ffd43b"></span>
+    <span class="heart" style="--c:#ff6b6b"></span>
+    <span class="heart" style="--c:#ff8787"></span>
+    <span class="heart" style="--c:#ffb3c1"></span>
+    <span class="heart" style="--c:#f06595"></span>
+    <span class="heart" style="--c:#e599f7"></span>
+  </div>
+
+  
+
+  <!-- Mute/Unmute -->
+  <button id="audio-toggle" class="audio-toggle" aria-pressed="false" title="Unmute">🔈</button>
+
+  <!-- Screens -->
+  <main id="app">
+
+    <!-- 1) Loading (rotating heart) -->
+    <section class="screen active" id="screen-loading" aria-labelledby="load-title">
+      <div class="stack center">
+        <div class="loader-heart" aria-hidden="true">
+          <span class="spinner">
+            <span class="heart" style="--c:#ff2c6d"></span>
+          </span>
+          <span class="shadow"></span>
+        </div>
+        <h1 id="load-title" class="title gradient">Preparing Something Special</h1>
+        <p class="subtitle muted">For someone very special...</p>
+      </div>
+    </section>
+
+    <!-- 2) Celebrate -->
+    <section class="screen" id="screen-intro" aria-labelledby="intro-title">
+      <div class="stack center">
+        <div class="icon-circle" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-7" />
+            <rect x="3" y="7" width="18" height="5" rx="2" />
+            <path d="M12 22V7" />
+            <path d="M12 7a3 3 0 1 1 3-3" />
+            <path d="M12 7a3 3 0 1 0-3-3" />
+          </svg>
+        </div>
+        <h1 id="intro-title" class="title gradient">Time to Celebrate!</h1>
+        <p class="subtitle">The countdown is over... Let’s celebrate! 🎉</p>
+        <button id="btn-start" class="btn primary"><span>🎁 Click me ✨</span></button>
+        <p class="muted tiny">Click to start the magic! ✨</p>
+      </div>
+    </section>
+
+    <!-- 3) Wish -->
+    <section class="screen" id="screen-wish" aria-labelledby="wish-title">
+      <div class="stack center">
+        <div class="icon-circle" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 2v4" />
+            <path d="M10 6h4" />
+            <path d="M3 14h18v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-5Z" />
+            <path d="M21 14c-3 0-3-2-6-2s-3 2-6 2-3-2-6-2" />
+          </svg>
+        </div>
+
+        <h1 id="wish-title" class="title gradient">Happiest Birthdayyy</h1>
+        <p class="name-line"><span id="name-slot">Madam Jii</span> <span aria-hidden="true">❤️</span></p>
+        <p class="subtitle">🎉 It’s your special day! 🎉</p>
+
+        <button id="btn-moments" class="btn primary">See Our Moments →</button>
+      </div>
+    </section>
+
+    <!-- 4) Moments (carousel, 1:1) -->
+    <section class="screen" id="screen-moments" aria-labelledby="moments-title">
+      <div class="stack center">
+        <div class="icon-circle" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h3l2-3h8l2 3h3a2 2 0 0 1 2 2Z"/>
+            <circle cx="12" cy="13" r="4"/>
+          </svg>
+        </div>
+        <h1 id="moments-title" class="title gradient">Moments with You</h1>
+        <p class="subtitle">Beautiful moments with <span id="name-slot-2">Madam Jii</span> 📷</p>
+
+        <div class="carousel" id="moments-carousel">
+          <div class="car-stage moment-card" id="car-stage" role="region" aria-roledescription="carousel" aria-label="Photo gallery"></div>
+          <button class="car-btn left" id="car-prev" aria-label="Previous photo">‹</button>
+          <button class="car-btn right" id="car-next" aria-label="Next photo">›</button>
+          <div class="car-dots" id="car-dots" aria-label="Slide indicators"></div>
+        </div>
+
+        <button id="btn-letter" class="btn primary">One Last Thing →</button>
+      </div>
+    </section>
+
+    <!-- 5) Letter -->
+    <section class="screen" id="screen-letter" aria-labelledby="letter-title">
+      <div class="stack center">
+        <h1 id="letter-title" class="title gradient">A Special Letter</h1>
+        <p class="subtitle">Just for you, on your special day ✉️</p>
+
+        <button id="letter-card" class="envelope" aria-haspopup="dialog" aria-controls="letter-modal">
+          <span class="heart-in-card" aria-hidden="true">❤</span>
+          <span class="spark" aria-hidden="true">✨</span>
+          <svg viewBox="0 0 24 24" width="56" height="56" fill="none" stroke="#ff59b5" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z"/>
+            <path d="m22 6-10 7L2 6"/>
+          </svg>
+          <span class="open-hint">Click to open</span>
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Letter Modal -->
+  <div id="letter-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
+    <div class="modal-card">
+      <button class="close" id="close-modal" aria-label="Close">✖</button>
+      <h3 id="modal-title" class="gradient">Dear <span id="name-slot-3">Madam Jii</span>,</h3>
+      <div id="letter-text" class="letter-text"></div>
+      <div class="modal-actions">
+        <button id="share-btn" class="btn ghost">Share</button>
+        <button id="confetti-btn" class="btn">Throw Confetti 🎊</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Music: autoplay muted, unmuted on screen 2 -->
+  <audio id="bg-music" preload="auto" src="happy-birthday.mp3" loop autoplay muted></audio>
+</body>
+</html>
